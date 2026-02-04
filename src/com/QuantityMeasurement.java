@@ -1,5 +1,7 @@
 package com;
 
+import java.util.Objects;
+
 public class QuantityMeasurement {
 
 	public static class Feet {
@@ -10,7 +12,7 @@ public class QuantityMeasurement {
 		}
 
 		@Override
-		public boolean equals(Objects obj) {
+		public boolean equals(Object obj) {
 			if (this == obj) {
 				return true;
 			}
@@ -23,7 +25,7 @@ public class QuantityMeasurement {
 
 		@Override
 		public int hashcode() {
-			return Objects.hash(feetValue);
+			return Object.hash(feetValue);
 		}
 	}
 
@@ -34,7 +36,7 @@ public class QuantityMeasurement {
 	
 	System.out.println(feet1.equals(feet2));
 	System.out.println(feet1.equals(feet3));
-	//System.out.println(feet1.equals(null));
+	System.out.println(feet1.equals(null));
 	}
 
 }
