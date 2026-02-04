@@ -13,7 +13,7 @@ public class QuantityMeasurement {
 
 		double toInches() {
 
-			return feetValue*12;
+			return feetValue * 12;
 		}
 
 		@Override
@@ -73,23 +73,29 @@ public class QuantityMeasurement {
 
 	}
 
-
-
-	public static void main(String[] args) {
+	public static void demonstrateFeetEquality() {
 		Feet feet1 = new Feet(0.0);
 		Feet feet2 = new Feet(0.0);
 		Feet feet3 = new Feet(1.0);
-		
 
 		System.out.println(feet1.equals(feet2));
 		System.out.println(feet1.equals(feet3));
 		System.out.println(feet1.equals(null));
+	}
+
+	public static void demonstrateInchesEquality() {
 
 		System.out.println(new Inches(2).equals(new Inches(2)));
-        System.out.println(new Inches(2).equals(new Inches(3)));
-        System.out.println(new Feet(1).equals(new Inches(12)));
-        System.out.println(new Inches(12).equals(new Feet(1)));
+		System.out.println(new Inches(2).equals(new Inches(3)));
+		System.out.println(new Feet(1).equals(new Inches(12)));
+		System.out.println(new Inches(12).equals(new Feet(1)));
 
+	}
+
+	public static void main(String[] args) {
+
+		demonstrateFeetEquality();
+		demonstrateInchesEquality();
 	}
 
 }
