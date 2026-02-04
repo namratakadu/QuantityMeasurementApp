@@ -11,6 +11,11 @@ public class QuantityMeasurement {
 			this.feetValue = feetValue;
 		}
 
+		double toInches() {
+
+			return feetValue*12;
+		}
+
 		@Override
 		public boolean equals(Object obj) {
 			if (this == obj) {
@@ -24,19 +29,67 @@ public class QuantityMeasurement {
 		}
 
 		@Override
-		public int hashcode() {
-			return Object.hash(feetValue);
+		public int hashCode() {
+			return Objects.hash(feetValue);
 		}
+
 	}
 
+	public static class Inches {
+
+		private final double inchValue;
+
+		public Inches(double inchValue) {
+			this.inchValue = inchValue;
+		}
+
+		double toInches() {
+			return inchValue;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) {
+				return true;
+			}
+			if (obj == null) {
+				return false;
+			}
+			if (obj instanceof Inches) {
+				Inches inch = (Inches) obj;
+				return Double.compare(this.inchValue, inch.inchValue) == 0;
+			}
+			if (obj instanceof Feet) {
+				Feet feet = (Feet) obj;
+				return Double.compare(this.toInches(), feet.toInches()) == 0;
+			}
+			return false;
+		}
+
+		@Override
+		public int hashCode() {
+			return Double.valueOf(inchValue).hashCode();
+		}
+
+	}
+
+
+
 	public static void main(String[] args) {
-	Feet feet1 = new Feet(0.0);
-	Feet feet2 = new Feet(0.0);
-	Feet feet3 = new Feet(1.0);
-	
-	System.out.println(feet1.equals(feet2));
-	System.out.println(feet1.equals(feet3));
-	System.out.println(feet1.equals(null));
+		Feet feet1 = new Feet(0.0);
+		Feet feet2 = new Feet(0.0);
+		Feet feet3 = new Feet(1.0);
+		
+
+		System.out.println(feet1.equals(feet2));
+		System.out.println(feet1.equals(feet3));
+		System.out.println(feet1.equals(null));
+
+		System.out.println(new Inches(2).equals(new Inches(2)));
+        System.out.println(new Inches(2).equals(new Inches(3)));
+        System.out.println(new Feet(1).equals(new Inches(12)));
+        System.out.println(new Inches(12).equals(new Feet(1)));
+
 	}
 
 }
