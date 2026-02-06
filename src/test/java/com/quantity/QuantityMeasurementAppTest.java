@@ -4,8 +4,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import com.quantity.QuantityMeasurement.Feet;
-import com.quantity.QuantityMeasurement.Inches;
+
+import com.quantity.Length.LengthUnit;
+import com.quantity.QuantityMeasurementApp.Feet;
+import com.quantity.QuantityMeasurementApp.Inches;
 
 public class QuantityMeasurementAppTest {
 
@@ -81,35 +83,77 @@ public class QuantityMeasurementAppTest {
 		assertEquals(one, one, "Object must be equal to itself (reflexive)");
 	}
 
-	// --- Type safety (different class) ---
-	@Test
-	void testEquality_TypeSafety() {
-		Inches one = new Inches(1.0);
-		Object other = new Object();
-		assertNotEquals(one, other, "Different types must not be equal");
-	}
-
-	// --- Optional: Guard invalid numeric inputs (only if your domain forbids them)
-	// ---
 	@Test
 	void testEquality_NonNumericInput() {
-		// If your Inches constructor rejects NaN/Infinity, then expect exception.
-		// Otherwise, remove or adapt this test.
-		assertThrows(IllegalArgumentException.class, () -> new Inches(Double.NaN));
-		assertThrows(IllegalArgumentException.class, () -> new Inches(Double.POSITIVE_INFINITY));
-		assertThrows(IllegalArgumentException.class, () -> new Inches(Double.NEGATIVE_INFINITY));
+		assertThrows(IllegalArgumentException.class, () -> new Length(Double.NaN, Length.LengthUnit.INCH));
+		assertThrows(IllegalArgumentException.class,
+				() -> new Length(Double.POSITIVE_INFINITY, Length.LengthUnit.FEET));
 	}
 
-	// --- Optional: Floating-point precision tolerance ---
 	@Test
-	void testEquality_FloatingPointPrecision() {
-		Inches base = new Inches(1.0);
-		Inches nearly = new Inches(1.0 + 1e-15);
-		// If your equals uses Double.compare, these should be equal for
-		// representationally equal values.
-		// If you implement tolerance, adapt equals accordingly and expect equality
-		// within epsilon.
-		assertEquals(base, nearly, "Values equal within floating precision should be equal");
+	void testEquality_FeetToFeet_SameValue() {
+		Length l1 = new Length(1.0, Length.LengthUnit.FEET);
+		Length l2 = new Length(1.0, Length.LengthUnit.FEET);
+		assertEquals(l1, l2);
+	}
+
+	@Test
+	void testEquality_InchToInch_SameValue() {
+		Length l1 = new Length(1.0, Length.LengthUnit.INCH);
+		Length l2 = new Length(1.0, Length.LengthUnit.INCH);
+		assertEquals(l1, l2);
+	}
+
+	@Test
+	void testEquality_FeetToInch_EquivalentValue() {
+		Length feet = new Length(1.0, Length.LengthUnit.FEET); // 12 inches
+		Length inches = new Length(12.0, Length.LengthUnit.INCH);
+		assertEquals(feet, inches);
+	}
+
+	@Test
+	void testEquality_InchToFeet_EquivalentValue() {
+		Length inches = new Length(12.0, Length.LengthUnit.INCH);
+		Length feet = new Length(1.0, Length.LengthUnit.FEET);
+		assertEquals(inches, feet);
+	}
+
+	@Test
+	void testEquality_FeetToFeet_DifferentValue() {
+		Length l1 = new Length(1.0, Length.LengthUnit.FEET);
+		Length l2 = new Length(2.0, Length.LengthUnit.FEET);
+		assertNotEquals(l1, l2);
+	}
+
+	@Test
+	void testEquality_InchToInch_DifferentValue() {
+		Length l1 = new Length(1.0, Length.LengthUnit.INCH);
+		Length l2 = new Length(2.0, Length.LengthUnit.INCH);
+		assertNotEquals(l1, l2);
+	}
+
+	@Test
+	void testEquality_InvalidUnit() {
+		assertThrows(IllegalArgumentException.class, () -> {
+			new Length(Double.NaN, Length.LengthUnit.FEET); // or some unsupported unit
+		});
+	}
+
+	@Test
+	void testEquality_NullUnit() {
+		assertThrows(NullPointerException.class, () -> new Length(1.0, null));
+	}
+
+	@Test
+	void testEquality_SameReference_Feet_Length() {
+		Length l = new Length(1.0, Length.LengthUnit.FEET);
+		assertEquals(l, l); // reflexive property
+	}
+
+	@Test
+	void testEquality_NullComparison_Feet_Length() {
+		Length l = new Length(1.0, Length.LengthUnit.FEET);
+		assertNotEquals(l, null);
 	}
 
 }
