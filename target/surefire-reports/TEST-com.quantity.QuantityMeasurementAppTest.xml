@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.quantity.QuantityMeasurementAppTest" time="0.093" tests="12" errors="0" skipped="0" failures="2">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.quantity.QuantityMeasurementAppTest" time="0.074" tests="20" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="22"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="IN"/>
     <property name="sun.boot.library.path" value="D:\Bridgelabz Proposal and training initiation\openjdk-22.0.1_windows-x64_bin\jdk-22.0.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\NA20661046\AppData\Local\Temp\surefire14342434649129049394\surefirebooter-20260205163822973_3.jar C:\Users\NA20661046\AppData\Local\Temp\surefire14342434649129049394 2026-02-05T16-38-22_781-jvmRun1 surefire-20260205163822973_1tmp surefire_0-20260205163822973_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\NA20661046\AppData\Local\Temp\surefire2759672364490451971\surefirebooter-20260206122456812_3.jar C:\Users\NA20661046\AppData\Local\Temp\surefire2759672364490451971 2026-02-06T12-24-56_634-jvmRun1 surefire-20260206122456812_1tmp surefire_0-20260206122456812_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\NA20661046\eclipse-workspace\QuantityMeasurementApp\target\test-classes;C:\Users\NA20661046\eclipse-workspace\QuantityMeasurementApp\target\classes;C:\Users\NA20661046\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\NA20661046\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\NA20661046\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\NA20661046\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\NA20661046\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\NA20661046\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\NA20661046\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\NA20661046\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -31,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\NA20661046\AppData\Local\Temp\surefire14342434649129049394\surefirebooter-20260205163822973_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\NA20661046\AppData\Local\Temp\surefire2759672364490451971\surefirebooter-20260206122456812_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="22.0.1+8-16"/>
@@ -59,39 +59,24 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="66.0"/>
   </properties>
-  <testcase name="testEquality_NonNumericInput" classname="com.quantity.QuantityMeasurementAppTest" time="0.033">
-    <failure message="Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown." type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
-	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
-	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
-	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
-	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
-	at com.quantity.QuantityMeasurementAppTest.testEquality_NonNumericInput(QuantityMeasurementAppTest.java:98)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-]]></failure>
-  </testcase>
-  <testcase name="testEquality_NonNumericInput1" classname="com.quantity.QuantityMeasurementAppTest" time="0.004"/>
+  <testcase name="testEquality_SameReference_Feet_Length" classname="com.quantity.QuantityMeasurementAppTest" time="0.022"/>
+  <testcase name="testEquality_InchToInch_SameValue" classname="com.quantity.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testEquality_FeetToFeet_DifferentValue" classname="com.quantity.QuantityMeasurementAppTest" time="0.002"/>
+  <testcase name="testEquality_NonNumericInput" classname="com.quantity.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testEquality_NonNumericInput1" classname="com.quantity.QuantityMeasurementAppTest" time="0.002"/>
+  <testcase name="testEquality_NullUnit" classname="com.quantity.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testEquality_InchToFeet_EquivalentValue" classname="com.quantity.QuantityMeasurementAppTest" time="0.0"/>
+  <testcase name="testEquality_NullComparison_Feet_Length" classname="com.quantity.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testEquality_FeetToFeet_SameValue" classname="com.quantity.QuantityMeasurementAppTest" time="0.001"/>
   <testcase name="testEquality_NullComparison1" classname="com.quantity.QuantityMeasurementAppTest" time="0.001"/>
-  <testcase name="testEquality_FloatingPointPrecision" classname="com.quantity.QuantityMeasurementAppTest" time="0.004">
-    <failure message="Values equal within floating precision should be equal ==&gt; expected: &lt;com.quantity.QuantityMeasurement$Inches@3ff00000&gt; but was: &lt;com.quantity.QuantityMeasurement$Inches@3ff00005&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: Values equal within floating precision should be equal ==> expected: <com.quantity.QuantityMeasurement$Inches@3ff00000> but was: <com.quantity.QuantityMeasurement$Inches@3ff00005>
-	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
-	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
-	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1156)
-	at com.quantity.QuantityMeasurementAppTest.testEquality_FloatingPointPrecision(QuantityMeasurementAppTest.java:112)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-]]></failure>
-  </testcase>
   <testcase name="testEquality_SameValue" classname="com.quantity.QuantityMeasurementAppTest" time="0.002"/>
-  <testcase name="testEquality_DifferentValue1" classname="com.quantity.QuantityMeasurementAppTest" time="0.002"/>
-  <testcase name="testEquality_DifferentValue" classname="com.quantity.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testEquality_DifferentValue1" classname="com.quantity.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testEquality_DifferentValue" classname="com.quantity.QuantityMeasurementAppTest" time="0.002"/>
   <testcase name="testEquality_SameReference" classname="com.quantity.QuantityMeasurementAppTest" time="0.001"/>
-  <testcase name="testEquality_NullComparison" classname="com.quantity.QuantityMeasurementAppTest" time="0.001"/>
-  <testcase name="testEquality_SameValue1" classname="com.quantity.QuantityMeasurementAppTest" time="0.0"/>
+  <testcase name="testEquality_NullComparison" classname="com.quantity.QuantityMeasurementAppTest" time="0.0"/>
+  <testcase name="testEquality_FeetToInch_EquivalentValue" classname="com.quantity.QuantityMeasurementAppTest" time="0.0"/>
+  <testcase name="testEquality_InchToInch_DifferentValue" classname="com.quantity.QuantityMeasurementAppTest" time="0.0"/>
+  <testcase name="testEquality_InvalidUnit" classname="com.quantity.QuantityMeasurementAppTest" time="0.001"/>
+  <testcase name="testEquality_SameValue1" classname="com.quantity.QuantityMeasurementAppTest" time="0.001"/>
   <testcase name="testEquality_SameReference1" classname="com.quantity.QuantityMeasurementAppTest" time="0.001"/>
-  <testcase name="testEquality_TypeSafety" classname="com.quantity.QuantityMeasurementAppTest" time="0.001"/>
 </testsuite>
