@@ -6,7 +6,7 @@ public class Length {
 	private LengthUnit unit;
 
 	public enum LengthUnit {
-		FEET(12.0), INCH(1.0);
+		FEET(12.0), INCH(1.0), YARD(36.0), CENTIMETERS(0.303701);
 
 		private final double conversionFactor;
 
@@ -26,7 +26,7 @@ public class Length {
 		}
 
 		if (Double.isNaN(value) || Double.isInfinite(value)) {
-			throw new IllegalArgumentException("Value must be a finite number");
+			throw new IllegalArgumentException("Value must be finite number");
 		}
 
 		this.value = value;
@@ -48,8 +48,8 @@ public class Length {
 
 	public boolean compare(Length thatLength) {
 		if (thatLength == null)
-			return false; // or throw IllegalArgumentException
-		final double EPSILON = 1e-6; // tolerance for floating point errors
+			return false; 
+		final double EPSILON = 1e-6;
 		return Math.abs(this.toBase() - thatLength.toBase()) < EPSILON;
 	}
 
@@ -75,6 +75,14 @@ public class Length {
 	public static void main(String[] args) {
 		Length length1 = new Length(1.0, LengthUnit.FEET);
 		Length length2 = new Length(12.0, LengthUnit.INCH);
+		System.out.println("Are lenths equal? " + length1.equals(length2));
+		
+		Length length3 = new Length(1.0, LengthUnit.YARD);
+		Length length4 = new Length(36.0, LengthUnit.INCH);
+		System.out.println("Are lenths equal? " + length1.equals(length2));
+		
+		Length length5 = new Length(100.0, LengthUnit.CENTIMETERS);
+		Length length6 = new Length(39.3701, LengthUnit.INCH);
 		System.out.println("Are lenths equal? " + length1.equals(length2));
 	}
 
