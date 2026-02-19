@@ -70,6 +70,7 @@ public class Length {
 		return new Length(targetValue, targetUnit);
 	}
 
+	//Added for UC6 addition of different lengths and result unit should in the form of 1st Length - start//
 	public Length add(Length thatLength) {
 		if (thatLength == null) {
 			throw new IllegalArgumentException("thatLength should not be null");
@@ -83,14 +84,43 @@ public class Length {
 		return new Length(resultValue, this.getUnit());
 
 	}
+	//Added for UC6 addition of different lengths and result unit should in the form of 1st Length - end//
+	//Added for UC7 addition of different lengths and result unit should in the form of given targetUnit form - start//
+	public Length add(Length length, LengthUnit targetUnit) {
+		if (length == null) {
+			throw new IllegalArgumentException("length should not be null");
+		}
+		if (length.unit == null || targetUnit == null) {
+			throw new IllegalArgumentException("units should not be null");
+		}
+		if (!Double.isFinite(this.value) || !Double.isFinite(length.value)) {
+			throw new IllegalArgumentException("values should be finite numbers");
+		}
 
+		return addAndConvert(length, targetUnit);
+	}
+	//Added for UC7 addition of different lengths and result unit should in the form of given targetUnit form - end//
+	//Added for UC7 addition of different lengths and result unit should in the form of given targetUnit form - start//
+	private Length addAndConvert(Length length, LengthUnit targetUnit) {
+		double thisInInches = this.value * this.unit.getConversionFactor();
+		double otherInInches = length.value * length.unit.getConversionFactor();
+
+		double sumInInches = thisInInches + otherInInches;
+
+		double sumInTarget = convertFromBaseToTargetUnit(sumInInches, targetUnit);
+
+		return new Length(sumInTarget, targetUnit);
+	}
+	//Added for UC7 addition of different lengths and result unit should in the form of given targetUnit form - end//
+	
+	//Added for UC7 addition of different lengths and result unit should in the form of 1st Length - start//
 	private double convertFromBaseToTargetUnit(double lengthInInches, LengthUnit targetUnit) {
 		if (targetUnit == null) {
 			throw new IllegalArgumentException("targetUnit should not be null");
 		}
 		return lengthInInches / targetUnit.getConversionFactor();
 	}
-
+	//Added for UC7 addition of different lengths and result unit should in the form of 1st Length - end//
 	@Override
 	public String toString() {
 		return value + " " + unit.name().toLowerCase();
@@ -134,6 +164,7 @@ public class Length {
 		Length twoInches = new Length(2.0, Length.LengthUnit.INCH);
 		Length sumInFeet = oneFoot.add(twoInches);
 		System.out.println(sumInFeet);
+
 
 	}
 
