@@ -3,6 +3,8 @@ package com.quantity;
 import java.text.DecimalFormat;
 import java.util.Objects;
 
+import com.quantity.Length.LengthUnit;
+
 public class QuantityMeasurementApp {
 
 	public static class Feet {
@@ -139,6 +141,12 @@ public class QuantityMeasurementApp {
 		return result;
 	}
 
+	public static Length demonstrateLengthAddition(Length length1, Length length2, LengthUnit targetUnit) {
+		Length result = length1.add(length2, targetUnit);		
+		System.out.println(result);
+		return result;
+	}
+
 	public static void main(String[] args) {
 
 		demonstrateFeetEquality();
@@ -148,6 +156,7 @@ public class QuantityMeasurementApp {
 
 		demonstrateLengthAddition(new Length(1.0, Length.LengthUnit.FEET), new Length(12.0, Length.LengthUnit.INCH));
 
+		demonstrateLengthAddition(new Length(2.5, LengthUnit.FEET), new Length(18.0, Length.LengthUnit.INCH),LengthUnit.YARD);
 	}
 
 }
