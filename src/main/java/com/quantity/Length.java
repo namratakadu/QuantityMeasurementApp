@@ -1,12 +1,14 @@
 package com.quantity;
 
+import java.math.RoundingMode;
+
 public class Length {
 
 	private double value;
 	private LengthUnit unit;
 
 	public enum LengthUnit {
-		FEET(12.0), INCH(1.0), YARD(36.0), CENTIMETERS(0.303701);
+		FEET(12.0), INCH(1.0), YARD(36.0), CENTIMETERS(0.3937007874);
 
 		private final double conversionFactor;
 
@@ -48,9 +50,50 @@ public class Length {
 
 	public boolean compare(Length thatLength) {
 		if (thatLength == null)
-			return false; 
+			return false;
 		final double EPSILON = 1e-6;
 		return Math.abs(this.toBase() - thatLength.toBase()) < EPSILON;
+	}
+
+	public Length convertTo(LengthUnit targetUnit) {
+		if (targetUnit == null) {
+			throw new IllegalArgumentException("targetUnit should not be null");
+		}
+		if (this.unit == targetUnit) {
+			return this;
+		}
+
+		double inInches = this.value * this.unit.getConversionFactor();
+
+		double targetValue = inInches / targetUnit.getConversionFactor();
+
+		return new Length(targetValue, targetUnit);
+	}
+
+	public Length add(Length thatLength) {
+		if (thatLength == null) {
+			throw new IllegalArgumentException("thatLength should not be null");
+		}
+
+		double thisInches = this.toBase();
+		double thatInches = thatLength.toBase();
+		double sumInInches = thisInches + thatInches;
+
+		double resultValue = convertFromBaseToTargetUnit(sumInInches, this.getUnit());
+		return new Length(resultValue, this.getUnit());
+
+	}
+
+	private double convertFromBaseToTargetUnit(double lengthInInches, LengthUnit targetUnit) {
+		if (targetUnit == null) {
+			throw new IllegalArgumentException("targetUnit should not be null");
+		}
+		return lengthInInches / targetUnit.getConversionFactor();
+	}
+
+	@Override
+	public String toString() {
+		return value + " " + unit.name().toLowerCase();
 	}
 
 	// --- Equality in base unit (INCH) ---
@@ -76,14 +119,22 @@ public class Length {
 		Length length1 = new Length(1.0, LengthUnit.FEET);
 		Length length2 = new Length(12.0, LengthUnit.INCH);
 		System.out.println("Are lenths equal? " + length1.equals(length2));
-		
+
 		Length length3 = new Length(1.0, LengthUnit.YARD);
 		Length length4 = new Length(36.0, LengthUnit.INCH);
 		System.out.println("Are lenths equal? " + length1.equals(length2));
-		
+
 		Length length5 = new Length(100.0, LengthUnit.CENTIMETERS);
 		Length length6 = new Length(39.3701, LengthUnit.INCH);
 		System.out.println("Are lenths equal? " + length1.equals(length2));
+
+		System.out.println(new Length(30.0, LengthUnit.CENTIMETERS).convertTo(LengthUnit.FEET));
+
+		Length oneFoot = new Length(1.0, Length.LengthUnit.FEET);
+		Length twoInches = new Length(2.0, Length.LengthUnit.INCH);
+		Length sumInFeet = oneFoot.add(twoInches);
+		System.out.println(sumInFeet);
+
 	}
 
 }

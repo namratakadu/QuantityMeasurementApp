@@ -1,5 +1,6 @@
 package com.quantity;
 
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class QuantityMeasurementApp {
@@ -92,9 +93,8 @@ public class QuantityMeasurementApp {
 
 	}
 
-	// ---- Static method to demonstrate comparisons ----
 	public static void demonstrateFeetInchesComparison() {
-		
+
 		Length oneFoot = new Length(1, Length.LengthUnit.FEET);
 		Length twelveInch = new Length(12, Length.LengthUnit.INCH);
 		Length tenInch = new Length(10, Length.LengthUnit.INCH);
@@ -105,23 +105,38 @@ public class QuantityMeasurementApp {
 		System.out.println("10 INCH   -> " + tenInch.toBase() + " INCH");
 		System.out.println("2 FEET    -> " + twoFeet.toBase() + " INCH");
 
-		// --- Equality (boolean) ---
-		// If you implemented Length#compare(Length) returning boolean:
-		System.out.println("\n-- Equality (boolean) --");
 		System.out.println("1 FEET == 12 INCH ? " + oneFoot.compare(twelveInch)); // true
 		System.out.println("1 FEET == 10 INCH ? " + oneFoot.compare(tenInch)); // false
-
-		// Or using equals() which should be consistent with base comparison:
 		System.out.println("1 FEET equals 12 INCH ? " + oneFoot.equals(twelveInch)); // true
 	}
 
-	// Small helper to print comparison result nicely
-	private static String sign(int cmp) {
-		if (cmp < 0)
-			return "<";
-		if (cmp > 0)
-			return ">";
-		return "==";
+	public static double convert(double value, Length.LengthUnit source, Length.LengthUnit target) {
+		return new Length(value, source).convertTo(target).getValue();
+	}
+
+	public static void demonstrateLengthConversions() {
+
+		double toFeet = convert(30, Length.LengthUnit.CENTIMETERS, Length.LengthUnit.FEET);
+
+		System.out.println("30 CM -> FEET: " + toFeet);
+
+		double toInches = convert(1, Length.LengthUnit.YARD, Length.LengthUnit.INCH);
+		System.out.println("1 YARD -> INCH: " + toInches);
+	}
+
+	public static Length demonstrateLengthAddition(Length length1, Length length2) {
+		if (length1 == null || length2 == null) {
+			throw new IllegalArgumentException("length1 and length2 must not be null");
+		}
+		Length result = length1.add(length2);
+
+		System.out.println("Input : add(Quantity(" + length1.getValue() + ", " + length1.getUnit() + "), " + "Quantity("
+				+ length2.getValue() + ", " + length2.getUnit() + "))");
+
+		System.out.println("Output: Quantity(" + result.getValue() + ", " + result.getUnit() + ")");
+		System.out.println();
+
+		return result;
 	}
 
 	public static void main(String[] args) {
@@ -129,6 +144,10 @@ public class QuantityMeasurementApp {
 		demonstrateFeetEquality();
 		demonstrateInchesEquality();
 		demonstrateFeetInchesComparison();
+		demonstrateLengthConversions();
+
+		demonstrateLengthAddition(new Length(1.0, Length.LengthUnit.FEET), new Length(12.0, Length.LengthUnit.INCH));
+
 	}
 
 }
